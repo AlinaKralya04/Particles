@@ -32,9 +32,32 @@ void Engine::input()
 			}
 		}
 }
+//this one feels weird :(
 void Engine::update(float dtAsSeconds)
 {
-
+	for (i=0; i < m_Particles;)
+	{
+		if (getTTL() > 0.0)
+		{
+			m_Particles[i].update(dt);
+			i++
+		}
+		else
+		{
+			m_Particles.erase(i);
+		}
+	}
+/*This is best done with an iterator-based for-loop
+Don't automatically increment the iterator for each iteration
+if getTTL() > 0.0
+Call update on that Particle
+Pass in the time differential since the last frame (dt)
+increment the iterator
+else
+erase the element the iterator points to
+erase returns an iterator that points to the next element after deletion, or end if it is the end of the vector
+Assign the iterator to this return value
+Do not increment the iterator (if you do you might increment past the end of the vector after you delete the last element)*/	
 }
 void Engine::draw()
 {
