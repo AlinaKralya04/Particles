@@ -2,15 +2,49 @@
 
 void Engine::input()
 {
-
+	while (m_Window.isOpen())
+	{
+		Event event;
+		while (m_Window.pollEvent(event))
+		{
+			if (Keyboard::isKeyPressed(Keyboard::Escape))
+			{
+				window.close();
+			}
+			// handle input segment
+			Vector2i current_pos(event.mouseButton.x, event.mouseButton.y);
+			if (event.type == Event::Closed)
+			{
+				// Quit the game when the window is closed
+				m_Window.close();
+			}
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					for (int i =0; i <5; i++)
+					{
+						int numPoints =  25 + rand() % (50 - 25 + 1);
+						Particle(numPoints);
+						
+					}
+				}
+			}
 }
 void Engine::update(float dtAsSeconds)
 {
 
-    
 }
 void Engine::draw()
 {
+	w_Window.clear();
+	//Loop through each Particle in m_Particles
+	for (i=0; i < m_Particles; i++)
+	{
+		// whaaaat???
+		w_Window.draw(m_Particles[i]);
+		w_Window.display();
+	}
 }
 
 
@@ -23,7 +57,6 @@ Engine::Engine()
 
     //Construct the RenderWindow
     VideoMode vm(pixelWidth, pixelHeight);
-    RenderWindow m_Window;
     m_Window.create(vm, "Particles", Style::Default);
 }
 
