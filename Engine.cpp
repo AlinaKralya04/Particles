@@ -30,6 +30,7 @@ void Engine::input()
 					}
 				}
 			}
+		}
 }
 void Engine::update(float dtAsSeconds)
 {
