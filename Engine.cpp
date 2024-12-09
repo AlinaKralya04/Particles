@@ -68,11 +68,11 @@ void Engine::input()
 				sound.play();
 				*/
 				//new
+				SoundBuffer buffer;
     				if (!buffer.loadFromFile("new-year-fireworks-sound4-180205.wav"))
 				{
 					return -1;
 				}
-				SoundBuffer buffer;
 				Sound sound;
 				sound.setBuffer(buffer);
 				sound.play();
