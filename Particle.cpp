@@ -1,5 +1,39 @@
 #include "Particle.h"
 
+Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
+{
+    m_ttl = TTL;
+    m_numPoints = numPoints;
+    m_radiansPerSec = ((float)rand() / (RAND_MAX)) * M_PI;
+    m_cartesianPlane.setCenter(0, 0);
+    m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
+    m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
+
+    m_vx = rand() % 401 + 100;
+    m_vy = rand() % 401 + 100;
+    if (rand() % 2 != 0) m_vx *= -1;
+    if (rand() % 2 != 0) m_vy *= -1;
+
+    m_color1 = Color(rand() % 256, rand() % 256, rand() % 256);
+    m_color2 = Color(rand() % 256, rand() % 256, rand() % 256);
+
+    double theta = ((float)rand() / (RAND_MAX)) * (M_PI / 2);
+    double dTheta = (2 * M_PI) / (numPoints - 1);
+
+    for (int j = 0; j < numPoints; j++)
+    {
+        double r, dx, dy;
+        r = rand() % 61 + 20;
+        dx = r * cos(theta);
+        dy = r * sin(theta);
+
+        m_A(0, j) = m_centerCoordinate.x + dx;
+        m_A(1, j) = m_centerCoordinate.y + dy;
+
+        theta += dTheta;
+    }
+}
+
 void Particle::rotate(double theta)
 {
     Vector2f temp = m_centerCoordinate;
