@@ -78,7 +78,7 @@ void Engine::update(float dtAsSeconds)
 {
 	for (int i = 0; i < m_particles.size();)
 	{
-		if (getTTL() > 0.0)
+		if (m_particles[i].getTTL() > 0.0) 
 		{
 			//check call update on each Particle in the vector whose ttl (time to live) has not expired
 			m_particles[i].update(dtAsSeconds);
