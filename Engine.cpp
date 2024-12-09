@@ -1,5 +1,40 @@
 #include "Engine.h"
 
+// The Engine constructor
+Engine::Engine()
+{
+	int pixelWidth = VideoMode::getDesktopMode().width;
+	int pixelHeight = VideoMode::getDesktopMode().height;
+
+	//Construct the RenderWindow
+	VideoMode vm(pixelWidth, pixelHeight);
+	//possible edit 
+	m_Window.create(vm, "Particles", Style::Default);
+}
+
+// Run will call all the private functions
+void Engine::run()
+{
+	Clock clock;
+	Time dt = clock.getElapsedTime();
+	cout << "Starting Particle unit tests..." << endl;
+	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
+	p.unitTests();
+	cout << "Unit tests complete.  Starting engine..." << endl;
+	// Game Loop
+	while (m_Window.isOpen())
+	{
+		//Restart the clock (this will return the time elapsed since the last frame)
+		Time restart = clock.restart();
+		//Convert the clock time to seconds
+		float seconds = dt.asSeconds();
+		// Call input, update draw
+		input();
+		update(seconds);
+		draw();
+	}
+}
+
 void Engine::input()
 {
 	while (m_Window.isOpen())
@@ -22,6 +57,11 @@ void Engine::input()
 			{
 				if (event.mouseButton.button == sf::Mouse::Left)
 				{
+					//Create a loop to construct 5 particles (I used 5, you can change this if you want)
+					//The numPoints parameter in the Particle constructor is a random number in the range [25:50]
+					//You can experiment with the range on this number
+					//It will determine the number of vertices in each particle
+					//Pass the position of the mouse click into the Particle constructor so it has a starting position
 					for (int i = 0; i < 5; i++)
 					{
 						int numPoints = 25 + rand() % (50 - 25 + 1);
@@ -40,8 +80,9 @@ void Engine::update(float dtAsSeconds)
 	{
 		if (getTTL() > 0.0)
 		{
+			//check call update on each Particle in the vector whose ttl (time to live) has not expired
 			m_Particles[i].update(dt);
-			i++
+			i++;
 		}
 		else
 		{
@@ -70,40 +111,5 @@ void Engine::draw()
 		// whaaaat???
 		w_Window.draw(m_Particles[i]);
 		w_Window.display();
-	}
-}
-
-
-// The Engine constructor
-Engine::Engine()
-{
-	int pixelWidth = VideoMode::getDesktopMode().width;
-	int pixelHeight = VideoMode::getDesktopMode().height;
-
-	//Construct the RenderWindow
-	VideoMode vm(pixelWidth, pixelHeight);
-	m_Window.create(vm, "Particles", Style::Default);
-}
-
-// Run will call all the private functions
-void Engine::run()
-{
-	Clock clock;
-	Time dt = clock.getElapsedTime();
-	cout << "Starting Particle unit tests..." << endl;
-	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
-	p.unitTests();
-	cout << "Unit tests complete.  Starting engine..." << endl;
-	// Game Loop
-	while (m_Window.isOpen())
-	{
-		//Restart the clock (this will return the time elapsed since the last frame)
-		Time restart = clock.restart();
-		//Convert the clock time to seconds
-		float seconds = dt.asSeconds();
-		// Call input, update draw
-		input();
-		update(seconds);
-		draw();
 	}
 }
