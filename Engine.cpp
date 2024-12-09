@@ -69,10 +69,7 @@ void Engine::input()
 				*/
 				//new
 				SoundBuffer buffer;
-    				if (!buffer.loadFromFile("new-year-fireworks-sound4-180205.wav"))
-				{
-					return -1;
-				}
+    				buffer.loadFromFile("new-year-fireworks-sound4-180205.wav");
 				Sound sound;
 				sound.setBuffer(buffer);
 				sound.play();
