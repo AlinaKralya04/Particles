@@ -58,7 +58,7 @@ void Engine::input()
 				for (int i = 0; i < 5; i++)
 				{
 					int numPoints = rand() % 26 + 25;
-					Particle(m_Window, numPoints, current_pos);
+					m_particles.push_back(Particle(m_Window, numPoints, current_pos));
 				}
 			}
 		}
