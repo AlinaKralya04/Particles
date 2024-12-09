@@ -76,17 +76,17 @@ void Engine::input()
 //this one feels weird :(
 void Engine::update(float dtAsSeconds)
 {
-	for (int i = 0; i < m_Particles;)
+	for (int i = 0; i < m_particles.size();)
 	{
 		if (getTTL() > 0.0)
 		{
 			//check call update on each Particle in the vector whose ttl (time to live) has not expired
-			m_Particles[i].update(dt);
+			m_particles[i].update(dtAsSeconds);
 			i++;
 		}
 		else
 		{
-			m_Particles.erase(i);
+			m_particles.erase(i);
 			//"Assign the iterator to this return value"?
 		}
 	}
