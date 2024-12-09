@@ -100,7 +100,7 @@ void Engine::draw()
 	}
 	m_Window.display();
 	//added sound
-	SoundBuffer buffer("sound.wav");
+	SoundBuffer buffer("new-year-fireworks-sound4-180205.wav");
 	Sound sound(buffer);
 	sound.play();
 }
