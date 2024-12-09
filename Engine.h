@@ -20,6 +20,13 @@ private:
 	void input();
 	void update(float dtAsSeconds);
 	void draw();
+	//added 24-29
+	Sound loadSound(string filename)
+	{
+    		SoundBuffer buffer; // this buffer is local to the function, it will be destroyed...
+    		buffer.loadFromFile(filename);
+    		return Sound(buffer);
+	}
 
 public:
 	// The Engine constructor
