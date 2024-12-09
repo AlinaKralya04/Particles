@@ -25,7 +25,7 @@ void Engine::run()
 	while (m_Window.isOpen())
 	{
 		//Restart the clock (this will return the time elapsed since the last frame)
-		Time restart = clock.restart();
+		clock.restart();
 		//Convert the clock time to seconds
 		float seconds = dt.asSeconds();
 		// Call input, update draw
