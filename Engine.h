@@ -20,7 +20,7 @@ private:
 	void input();
 	void update(float dtAsSeconds);
 	void draw();
-	//added 24-29
+	//added 24
 	SoundBuffer buffer("sound.wav");
 
 public:
