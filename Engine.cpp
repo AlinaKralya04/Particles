@@ -111,6 +111,6 @@ void Engine::draw()
 	{
 		// whaaaat???
 		w_Window.draw(m_Particles[i]);
-		w_Window.display();
 	}
+	w_Window.display();
 }
