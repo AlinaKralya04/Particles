@@ -99,4 +99,8 @@ void Engine::draw()
 		m_Window.draw(m_particles.at(i));
 	}
 	m_Window.display();
+	//added sound
+	SoundBuffer buffer;
+	Sound sound(buffer);
+	sound.play();
 }
