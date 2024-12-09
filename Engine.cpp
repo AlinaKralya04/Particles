@@ -105,12 +105,12 @@ void Engine::update(float dtAsSeconds)
 
 void Engine::draw()
 {
-	w_Window.clear();
+	m_Window.clear();
+
 	//Loop through each Particle in m_Particles
-	for (i = 0; i < m_Particles; i++)
+	for (int i = 0; i < m_particles.size(); i++)
 	{
-		// whaaaat???
-		w_Window.draw(m_Particles[i]);
+		m_Window.draw(m_particles.at(i));
 	}
-	w_Window.display();
+	m_Window.display();
 }
