@@ -87,6 +87,7 @@ void Engine::update(float dtAsSeconds)
 		else
 		{
 			m_Particles.erase(i);
+			//"Assign the iterator to this return value"?
 		}
 	}
 	/*This is best done with an iterator-based for-loop
