@@ -100,7 +100,7 @@ void Engine::draw()
 	}
 	m_Window.display();
 	//added sound
-	SoundBuffer buffer;
+	SoundBuffer buffer("sound.wav");
 	Sound sound(buffer);
 	sound.play();
 }
