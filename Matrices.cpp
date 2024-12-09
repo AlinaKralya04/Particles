@@ -102,7 +102,7 @@ namespace Matrices
 		(*this)(0, 0) = cos(theta);
 		(*this)(0, 1) = -sin(theta);
 		(*this)(1, 0) = sin(theta);
-		(*this)(1, 0) = cos(theta);
+		(*this)(1, 1) = cos(theta);
 	}
 
 	ScalingMatrix::ScalingMatrix(double scale) : Matrix(2, 2)
