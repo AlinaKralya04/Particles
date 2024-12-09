@@ -28,6 +28,13 @@ void Engine::run()
 		Time dt = clock.restart();
 		float seconds = dt.asSeconds();
 
+		while (Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			input();
+			draw();
+			Time dt = clock.restart();
+		}
+
 		// Call input, update draw
 		input();
 		update(seconds);
