@@ -62,6 +62,10 @@ void Engine::input()
 		{
 			if (event.mouseButton.button == Mouse::Left)
 			{
+				//added sound
+				SoundBuffer buffer("new-year-fireworks-sound4-180205.wav");
+				Sound sound(buffer);
+				sound.play();
 				for (int i = 0; i < 5; i++)
 				{
 					int numPoints = rand() % 26 + 25;
@@ -99,8 +103,5 @@ void Engine::draw()
 		m_Window.draw(m_particles.at(i));
 	}
 	m_Window.display();
-	//added sound
-	SoundBuffer buffer("new-year-fireworks-sound4-180205.wav");
-	Sound sound(buffer);
-	sound.play();
+	
 }
