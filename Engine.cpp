@@ -16,18 +16,18 @@ Engine::Engine()
 void Engine::run()
 {
 	Clock clock;
-	Clock dt = clock.getElapsedTime();
+
 	cout << "Starting Particle unit tests..." << endl;
 	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
 	p.unitTests();
 	cout << "Unit tests complete.  Starting engine..." << endl;
+	
 	// Game Loop
 	while (m_Window.isOpen())
 	{
-		//Restart the clock (this will return the time elapsed since the last frame)
-		clock.restart();
-		//Convert the clock time to seconds
+		Time dt = clock.restart();
 		float seconds = dt.asSeconds();
+
 		// Call input, update draw
 		input();
 		update(seconds);
