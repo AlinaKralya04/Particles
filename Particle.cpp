@@ -1,5 +1,32 @@
 #include "Particle.h"
 
+void Particle::rotate(double theta)
+{
+    Vector2f temp = m_centerCoordinate;
+    translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
+
+    RotationMatrix R(theta);
+    m_A = R * m_A;
+    translate(temp.x, temp.y);
+}
+
+void Particle::scale(double c)
+{
+    Vector2f temp = m_centerCoordinate;
+    translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
+
+    ScalingMatrix S(c);
+    m_A = S * m_A;
+    translate(temp.x, temp.y);
+}
+
+void Particle::translate(double xShift, double yShift)
+{
+    TranslationMatrix T(xShift, yShift, m_A.getCols());
+    m_A = T + m_A;
+    m_centerCoordinate.x += xShift;
+    m_centerCoordinate.y += yShift;
+}
 
 bool Particle::almostEqual(double a, double b, double eps)
 {
