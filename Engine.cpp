@@ -16,7 +16,7 @@ Engine::Engine()
 void Engine::run()
 {
 	Clock clock;
-	Time dt = clock.getElapsedTime();
+	Clock dt = clock.getElapsedTime();
 	cout << "Starting Particle unit tests..." << endl;
 	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
 	p.unitTests();
