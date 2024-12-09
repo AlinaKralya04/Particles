@@ -42,7 +42,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
     lines[0].position = center;
     lines[0].color = m_color1;
 
-    for (int j = 1; j < m_numPoints; j++)
+    for (int j = 1; j <= m_numPoints; j++)
     {
         Vector2f curr(m_A(0, j - 1), m_A(1, j - 1));
         Vector2f point(target.mapCoordsToPixel(curr, m_cartesianPlane));
@@ -62,7 +62,7 @@ void Particle::update(float dt)
 
     float dx, dy;
     dx = m_vx * dt;
-    m_vy -= G * dt;
+    m_vy -= (G * dt);
     dy = m_vy * dt;
 
     translate(dx, dy);
