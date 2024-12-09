@@ -37,43 +37,34 @@ void Engine::run()
 
 void Engine::input()
 {
-	while (m_Window.isOpen())
+	Event event;
+	while (m_Window.pollEvent(event))
 	{
-		Event event;
-		while (m_Window.pollEvent(event))
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
-			if (Keyboard::isKeyPressed(Keyboard::Escape))
+			m_Window.close();
+		}
+
+		if (event.type == Event::Closed)
+		{
+			m_Window.close();
+		}
+
+		Vector2i current_pos(event.mouseButton.x, event.mouseButton.y);
+		if (event.type == Event::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == Mouse::Left)
 			{
-				m_Window.close();
-			}
-			// handle input segment
-			Vector2i current_pos(event.mouseButton.x, event.mouseButton.y);
-			if (event.type == Event::Closed)
-			{
-				// Quit the game when the window is closed
-				m_Window.close();
-			}
-			if (event.type == sf::Event::MouseButtonPressed)
-			{
-				if (event.mouseButton.button == sf::Mouse::Left)
+				for (int i = 0; i < 5; i++)
 				{
-					//Create a loop to construct 5 particles (I used 5, you can change this if you want)
-					//The numPoints parameter in the Particle constructor is a random number in the range [25:50]
-					//You can experiment with the range on this number
-					//It will determine the number of vertices in each particle
-					//Pass the position of the mouse click into the Particle constructor so it has a starting position
-					for (int i = 0; i < 5; i++)
-					{
-						int numPoints = 25 + rand() % (50 - 25 + 1);
-						Particle(m_Window, numPoints, current_pos);
-					}
+					int numPoints = rand() % 26 + 25;
+					Particle(m_Window, numPoints, current_pos);
 				}
 			}
 		}
 	}
 }
 
-//this one feels weird :(
 void Engine::update(float dtAsSeconds)
 {
 	for (int i = 0; i < m_particles.size();)
