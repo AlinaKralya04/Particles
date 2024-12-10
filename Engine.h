@@ -1,8 +1,6 @@
 #pragma once
 #pragma once
 #include <SFML/Graphics.hpp>
-//added audio
-#include <SFML/Audio.hpp>
 #include "Particle.h"
 using namespace sf;
 using namespace std;
