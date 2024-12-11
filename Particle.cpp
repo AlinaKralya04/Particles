@@ -9,27 +9,35 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
 
+    //Initial horizontal and vertical velocities of our particle
     m_vx = rand() % 401 + 100;
     m_vy = rand() % 401 + 100;
     if (rand() % 2 != 0) m_vx *= -1;
     if (rand() % 2 != 0) m_vy *= -1;
 
+    //Random colors for our particle
     m_color1 = Color(rand() % 256, rand() % 256, rand() % 256);
     m_color2 = Color(rand() % 256, rand() % 256, rand() % 256);
 
+    //Theta - Angle between [0 : PI/2]
     double theta = ((float)rand() / (RAND_MAX)) * (M_PI / 2);
+
+    //dTheta - amount we will rotate per vertex
     double dTheta = (2 * M_PI) / (numPoints - 1);
 
+    //Updating vertices of our particle
     for (int j = 0; j < numPoints; j++)
     {
         double r, dx, dy;
-        r = rand() % 61 + 20;
-        dx = r * cos(theta);
-        dy = r * sin(theta);
+        r = rand() % 61 + 20; //randomise length of the vector
+        dx = r * cos(theta); //x-component
+        dy = r * sin(theta); //y-component
 
+        //Assigning Cartesian coordinate of new vertex to m_A
         m_A(0, j) = m_centerCoordinate.x + dx;
         m_A(1, j) = m_centerCoordinate.y + dy;
 
+        //update theta to move to the next vertex
         theta += dTheta;
     }
 }
@@ -44,8 +52,11 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
 
     for (int j = 1; j <= m_numPoints; j++)
     {
-        Vector2f curr(m_A(0, j - 1), m_A(1, j - 1));
-        Vector2f point(target.mapCoordsToPixel(curr, m_cartesianPlane));
+        //converting coordinates from j - 1 column in m_A to vector
+        Vector2f coord(m_A(0, j - 1), m_A(1, j - 1));
+
+        //maping coordinates to pixels
+        Vector2f point(target.mapCoordsToPixel(coord, m_cartesianPlane));
 
         lines[j].position = point;
         lines[j].color = m_color2;
@@ -56,10 +67,11 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
 
 void Particle::update(float dt)
 {
-    m_ttl -= dt;
+    m_ttl -= dt; //decreasing time to live
     rotate(dt * m_radiansPerSec);
     scale(SCALE);
 
+    //calculating the shift
     float dx, dy;
     dx = m_vx * dt;
     m_vy -= (G * dt);
